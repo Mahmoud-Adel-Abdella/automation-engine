@@ -18,7 +18,9 @@ public class TestSummaryListener implements ITestListener {
     private int passed = 0;
     private int failed = 0;
     private int total = 0;
+    private int skipped = 0;
     private List<String> failedTests = new ArrayList<>();
+    private List<String> skippedTests = new ArrayList<>();
     private Instant startTime;
 
     @Override
@@ -40,6 +42,13 @@ public class TestSummaryListener implements ITestListener {
     }
 
     @Override
+    public void onTestSkipped(ITestResult result) {
+        skipped++;
+        total++;
+        skippedTests.add(result.getName());
+    }
+
+    @Override
     public void onFinish(ITestContext context) {
         try {
             Instant endTime = Instant.now();
@@ -50,6 +59,7 @@ public class TestSummaryListener implements ITestListener {
             summary.put("total", total);
             summary.put("passed", passed);
             summary.put("failed", failed);
+            summary.put("skipped", skipped);
             summary.put("failed_tests", failedTests);
             summary.put("duration", formatDuration(duration));
 
