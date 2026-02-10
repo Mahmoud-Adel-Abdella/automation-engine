@@ -2,12 +2,13 @@ package Tests;
 
 import Pages.RegisterPage;
 import Utilities.DataFactory;
+import Utilities.TestSummaryListener;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import Utilities.TestListeners;
 
-@Listeners(TestListeners.class)
+@Listeners({TestListeners.class, TestSummaryListener.class})
 public class RegisterTest extends BaseTest{
     RegisterPage registerPage;
 

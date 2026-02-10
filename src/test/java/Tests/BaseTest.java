@@ -1,9 +1,14 @@
 package Tests;
 
+import Utilities.ConfigManager;
 import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.events.EventFiringDecorator;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
@@ -18,24 +23,51 @@ public class BaseTest {
     protected SoftAssert softAssert;
     protected Faker faker;
 
+    String browser = ConfigManager.get("environment.browser");
+    boolean headless = ConfigManager.getBoolean("environment.headless");
+    String baseUrl = ConfigManager.get("environment.baseUrl");
+
+
     @BeforeMethod(alwaysRun = true)
     public void setUpTest() {
-        ChromeOptions options = new ChromeOptions();
 
-        options.addArguments("--headless=new");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--disable-gpu");
-        options.addArguments("--window-size=1920,1080");
+        switch (browser.toLowerCase()) {
 
-        WebDriverManager.chromedriver().setup();
-        WebDriver originalDriver = new ChromeDriver(options);
+            case "firefox":
+                WebDriverManager.firefoxdriver().setup();
+                FirefoxOptions ffOptions = new FirefoxOptions();
+                if (headless) {
+                    ffOptions.addArguments("--headless");
+                }
+                driver = new FirefoxDriver(ffOptions);
+                break;
+
+            case "edge":
+                WebDriverManager.edgedriver().setup();
+                EdgeOptions meOptions = new EdgeOptions();
+                if (headless) {
+                    meOptions.addArguments("--headless");
+                }
+                driver = new EdgeDriver(meOptions);
+                break;
+
+            case "chrome":
+            default:
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions chromeOptions = new ChromeOptions();
+                if (headless) {
+                    chromeOptions.addArguments("--headless=new");
+                }
+                driver = new ChromeDriver(chromeOptions);
+                break;
+        }
+
         WebDriverListeners myListeners = new WebDriverListeners();
-        driver = new EventFiringDecorator(myListeners).decorate(originalDriver);
+        driver = new EventFiringDecorator(myListeners).decorate(driver);
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.get("https://www.daftra.com/");
+        driver.get(baseUrl);
 
         faker = new Faker();
         softAssert = new SoftAssert();

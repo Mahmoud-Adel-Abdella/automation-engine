@@ -1,8 +1,10 @@
 package Tests;
 
 import Pages.LoginPage;
+import Utilities.ConfigManager;
 import Utilities.DataFactory;
 import Utilities.TestListeners;
+import Utilities.TestSummaryListener;
 import org.apache.hc.core5.http.nio.support.AbstractServerExchangeHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,13 +14,13 @@ import org.testng.annotations.Test;
 
 import javax.xml.crypto.Data;
 
-@Listeners(TestListeners.class)
+@Listeners({TestListeners.class, TestSummaryListener.class})
 public class LoginTest extends BaseTest{
     private static final Logger log = LoggerFactory.getLogger(LoginTest.class);
     LoginPage loginPage;
 
-    String email = "mahaammoud224@gmail.com";
-    String password = "u@5hQ33YkG@s2Tw";
+    String username = ConfigManager.get("credentials.username");
+    String password = ConfigManager.get("credentials.password");
 
     @Test
     public void validLoginTest(){
@@ -26,7 +28,7 @@ public class LoginTest extends BaseTest{
 
         loginPage.navigateToLoginPage();
 
-        loginPage.fillCredentials(email , password);
+        loginPage.fillCredentials(username , password);
 
         Assert.assertTrue(loginPage.checkDashboardRedirection());
     }

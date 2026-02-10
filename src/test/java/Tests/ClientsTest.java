@@ -2,15 +2,17 @@ package Tests;
 
 import Pages.ClientsPage;
 import Pages.LoginPage;
+import Utilities.ConfigManager;
 import Utilities.DataFactory;
 import Utilities.TestListeners;
+import Utilities.TestSummaryListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-@Listeners(TestListeners.class)
+@Listeners({TestListeners.class, TestSummaryListener.class})
 public class ClientsTest extends BaseTest{
     private static final Logger log = LoggerFactory.getLogger(ClientsTest.class);
     ClientsPage clientsPage;
@@ -73,6 +75,4 @@ public class ClientsTest extends BaseTest{
         Assert.assertTrue(clientsPage.verifySuccessEdit(DataFactory.getPhoneNumber() , DataFactory.getCity())[1]);
         Assert.assertTrue(clientsPage.verifySuccessEdit(DataFactory.getPhoneNumber() , DataFactory.getCity())[2]);
     }
-
-
 }

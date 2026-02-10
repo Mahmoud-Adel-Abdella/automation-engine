@@ -5,6 +5,7 @@
 
     <listeners>
         <listener class-name="Utilities.TestListeners"/>
+        <listener class-name="Utilities.TestSummaryListener"/>
     </listeners>
 
     <test name="Login Tests" verbose="2" preserve-order="true">

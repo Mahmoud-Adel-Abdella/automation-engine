@@ -1,0 +1,8 @@
+{
+  "duration" : "1m 17s",
+  "total" : 3,
+  "passed" : 0,
+  "failed" : 3,
+  "failed_tests" : [ "editClientTest", "invalidAddNewClient", "validAddNewClient" ],
+  "status" : "failed"
+}

@@ -1,0 +1,15 @@
+{
+  "client": {
+    "id": "daftra",
+    "project": "web_app"
+  },
+  "environment": {
+    "baseUrl": "https://www.daftra.com/",
+    "browser": "edge",
+    "headless": false
+  },
+  "credentials": {
+    "username": "mahaammoud224@gmail.com",
+    "password": "u@5hQ33YkG@s2Tw"
+  }
+}
