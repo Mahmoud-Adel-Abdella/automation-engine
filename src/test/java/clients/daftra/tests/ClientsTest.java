@@ -1,14 +1,12 @@
-package Clients.Daftra.Tests;
+package clients.daftra.tests;
 
-import Engine.Base.BaseTest;
-import Engine.Listeners.TestListeners;
-import Engine.Listeners.TestSummaryListener;
-import Clients.Daftra.Pages.ClientsPage;
-import Clients.Daftra.Pages.LoginPage;
-import Engine.Utils.ConfigManager;
-import Engine.Utils.DataFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import engine.base.BaseTest;
+import engine.listeners.TestListeners;
+import engine.listeners.TestSummaryListener;
+import clients.daftra.pages.ClientsPage;
+import clients.daftra.pages.LoginPage;
+import engine.utils.ConfigManager;
+import engine.utils.DataFactory;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;

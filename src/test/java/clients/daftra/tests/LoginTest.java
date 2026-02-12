@@ -1,18 +1,18 @@
-package Clients.Daftra.Tests;
+package clients.daftra.tests;
 
-import Engine.Base.BaseTest;
-import Clients.Daftra.Pages.LoginPage;
-import Engine.Listeners.TestListeners;
-import Engine.Listeners.TestSummaryListener;
-import Engine.Utils.ConfigManager;
-import Engine.Utils.DataFactory;
+import engine.base.BaseTest;
+import clients.daftra.pages.LoginPage;
+import engine.utils.ConfigManager;
+import engine.utils.DataFactory;
+import engine.listeners.TestListeners;
+import engine.listeners.TestSummaryListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-@Listeners({TestListeners.class, TestSummaryListener.class})
+@Listeners({engine.listeners.TestListeners.class, engine.listeners.TestSummaryListener.class})
 public class LoginTest extends BaseTest {
     private static final Logger log = LoggerFactory.getLogger(LoginTest.class);
     LoginPage loginPage;

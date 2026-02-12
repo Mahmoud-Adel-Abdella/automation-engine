@@ -1,10 +1,10 @@
-package Clients.Daftra.Tests;
+package clients.daftra.tests;
 
-import Engine.Base.BaseTest;
-import Clients.Daftra.Pages.RegisterPage;
-import Engine.Listeners.TestListeners;
-import Engine.Listeners.TestSummaryListener;
-import Engine.Utils.DataFactory;
+import engine.base.BaseTest;
+import clients.daftra.pages.RegisterPage;
+import engine.listeners.TestListeners;
+import engine.listeners.TestSummaryListener;
+import engine.utils.DataFactory;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
