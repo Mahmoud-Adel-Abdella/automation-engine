@@ -1,6 +1,6 @@
-package Clients.AutomationExcercise.Pages;
+package clients.automationExercise2.pages;
 
-import Engine.Base.BasePage;
+import engine.base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -32,7 +32,7 @@ public class RegistrationPage extends BasePage {
     private final By zipCodeLocator = By.xpath("//*[@data-qa=\"zipcode\"]");
     private final By mobileNumberLocator = By.xpath("//*[@data-qa=\"mobile_number\"]");
 
-    private final By submitBtnLocator = By.xpath("//*[@dataa-qa=\"create-account\"]");
+    private final By submitBtnLocator = By.xpath("//*[@data-qa=\"create-account\"]");
 
     public void fillRegister(String email, String name) {
         write(nameInputLocator, name);

@@ -1,6 +1,6 @@
-package Engine.Base;
+package engine.base;
 
-import Engine.Utils.ConfigManager;
+import engine.utils.ConfigManager;
 import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,7 +12,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.events.EventFiringDecorator;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
-import Engine.Listeners.WebDriverListeners;
+import engine.listeners.WebDriverListeners;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import java.time.Duration;
@@ -27,6 +27,13 @@ public class BaseTest {
     boolean headless = ConfigManager.getBoolean("environment.headless");
     String baseUrl = ConfigManager.get("environment.baseUrl");
 
+    static {
+        if (System.getProperty("client") == null) {
+            throw new RuntimeException(
+                    "Client not specified! Use -Dclient=clientName"
+            );
+        }
+    }
 
     @BeforeMethod(alwaysRun = true)
     public void setUpTest() {

@@ -1,8 +1,8 @@
-package Engine.Listeners;
+package engine.listeners;
 
-import Engine.Base.BaseTest;
-import Engine.Utils.ConfigManager;
-import Engine.Utils.ExtentManger;
+import engine.base.BaseTest;
+import engine.utils.ConfigManager;
+import engine.utils.ExtentManger;
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
@@ -43,10 +43,6 @@ public class TestListeners implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
-
-        if (ConfigManager.getBoolean("execution.stopOnFailure")) {
-            throw new RuntimeException("Stopping on first failure");
-        }
 
         ExtentManger.getTest()
                 .log(Status.FAIL, "❎❎ Test Failed ❎❎: " + result.getThrowable());

@@ -1,9 +1,9 @@
-package Clients.AutomationExcercise.Tests;
+package clients.automationExercise2.tests;
 
-import Clients.AutomationExcercise.Pages.RegistrationPage;
-import Engine.Base.BaseTest;
-import Engine.Listeners.TestListeners;
-import Engine.Listeners.TestSummaryListener;
+import clients.automationExercise.pages.RegistrationPage;
+import engine.base.BaseTest;
+import engine.listeners.TestListeners;
+import engine.listeners.TestSummaryListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -11,7 +11,8 @@ import org.testng.annotations.Test;
 public class RegistrationTest extends BaseTest {
     RegistrationPage register;
 
-    @Test
+
+    @Test(groups = {"automationExercise"})
     public void RegisterTest(){
         register = new RegistrationPage(driver);
 

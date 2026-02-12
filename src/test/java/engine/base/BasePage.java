@@ -1,11 +1,11 @@
-package Engine.Base;
+package engine.base;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import Engine.Utils.ClickUtils;
+import engine.utils.ClickUtils;
 
 import java.time.Duration;
 import java.util.List;

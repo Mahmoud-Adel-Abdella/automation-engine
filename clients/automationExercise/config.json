@@ -1,6 +1,6 @@
 {
   "client": {
-    "id": "automationExcercise",
+    "id": "automationExercise",
     "project": "web_app"
   },
   "environment": {
@@ -11,8 +11,5 @@
   "credentials": {
     "username": "mahaammoud224@gmailلا.com",
     "password": "u@5hQ33YkG@s2Tw"
-  },
-  "execution": {
-    "stopOnFailure": true
   }
 }

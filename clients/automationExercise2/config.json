@@ -1,10 +1,10 @@
 {
   "client": {
-    "id": "daftra",
+    "id": "automationExercise2",
     "project": "web_app"
   },
   "environment": {
-    "baseUrl": "https://www.daftra.com/",
+    "baseUrl": "https://www.automationexercise.com/login",
     "browser": "chrome",
     "headless": true
   },

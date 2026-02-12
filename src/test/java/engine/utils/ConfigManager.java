@@ -1,6 +1,5 @@
-package Engine.Utils;
+package engine.utils;
 
-import Engine.Utils.ClientContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

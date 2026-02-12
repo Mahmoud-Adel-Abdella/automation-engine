@@ -1,4 +1,4 @@
-package Engine.Utils;
+package engine.utils;
 
 import com.github.javafaker.Faker;
 

@@ -1,23 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-
 <suite name="All Test Suite">
-
-    <listeners>
-        <listener class-name="Utilities.TestListeners"/>
-        <listener class-name="Utilities.TestSummaryListener"/>
-    </listeners>
-
-    <test name="Login Tests" verbose="2" preserve-order="true">
-        <classes>
-            <class name="Clients.Daftra.Tests.LoginTest">
-                <methods>
-                    <include name="validLoginTest"/>
-                    <include name="invalidLoginTest"/>
-                    <include name="invalidSecurityCodeValidation"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
 </suite>
