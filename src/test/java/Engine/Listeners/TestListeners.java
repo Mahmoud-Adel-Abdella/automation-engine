@@ -1,15 +1,13 @@
-package Utilities;
+package Engine.Listeners;
 
-import Tests.BaseTest;
+import Engine.Base.BaseTest;
+import Engine.Utils.ConfigManager;
+import Engine.Utils.ExtentManger;
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-
-import java.io.IOException;
-
-import static Utilities.ExtentManger.screenShot;
 
 public class TestListeners implements ITestListener {
 
@@ -45,6 +43,10 @@ public class TestListeners implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
+
+        if (ConfigManager.getBoolean("execution.stopOnFailure")) {
+            throw new RuntimeException("Stopping on first failure");
+        }
 
         ExtentManger.getTest()
                 .log(Status.FAIL, "❎❎ Test Failed ❎❎: " + result.getThrowable());

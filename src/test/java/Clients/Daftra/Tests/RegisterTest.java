@@ -1,18 +1,19 @@
-package Tests;
+package Clients.Daftra.Tests;
 
-import Pages.RegisterPage;
-import Utilities.DataFactory;
-import Utilities.TestSummaryListener;
+import Engine.Base.BaseTest;
+import Clients.Daftra.Pages.RegisterPage;
+import Engine.Listeners.TestListeners;
+import Engine.Listeners.TestSummaryListener;
+import Engine.Utils.DataFactory;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import Utilities.TestListeners;
 
 @Listeners({TestListeners.class, TestSummaryListener.class})
-public class RegisterTest extends BaseTest{
+public class RegisterTest extends BaseTest {
     RegisterPage registerPage;
 
-    @Test
+    @Test(groups = {"smoke" ,"regression" ,"register"})
     public void registerTest() throws InterruptedException {
         checkValidation1();
         fillCredentials1();

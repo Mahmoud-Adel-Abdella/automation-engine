@@ -1,28 +1,26 @@
-package Tests;
+package Clients.Daftra.Tests;
 
-import Pages.LoginPage;
-import Utilities.ConfigManager;
-import Utilities.DataFactory;
-import Utilities.TestListeners;
-import Utilities.TestSummaryListener;
-import org.apache.hc.core5.http.nio.support.AbstractServerExchangeHandler;
+import Engine.Base.BaseTest;
+import Clients.Daftra.Pages.LoginPage;
+import Engine.Listeners.TestListeners;
+import Engine.Listeners.TestSummaryListener;
+import Engine.Utils.ConfigManager;
+import Engine.Utils.DataFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import javax.xml.crypto.Data;
-
 @Listeners({TestListeners.class, TestSummaryListener.class})
-public class LoginTest extends BaseTest{
+public class LoginTest extends BaseTest {
     private static final Logger log = LoggerFactory.getLogger(LoginTest.class);
     LoginPage loginPage;
 
     String username = ConfigManager.get("credentials.username");
     String password = ConfigManager.get("credentials.password");
 
-    @Test
+    @Test(groups = {"login","smoke","regression"})
     public void validLoginTest(){
         loginPage = new LoginPage(driver);
 

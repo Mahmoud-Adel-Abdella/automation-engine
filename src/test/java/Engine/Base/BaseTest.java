@@ -1,6 +1,6 @@
-package Tests;
+package Engine.Base;
 
-import Utilities.ConfigManager;
+import Engine.Utils.ConfigManager;
 import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,7 +12,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.events.EventFiringDecorator;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
-import Utilities.WebDriverListeners;
+import Engine.Listeners.WebDriverListeners;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import java.time.Duration;

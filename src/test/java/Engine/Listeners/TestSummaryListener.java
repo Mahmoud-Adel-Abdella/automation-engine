@@ -1,17 +1,16 @@
-package Utilities;
+package Engine.Listeners;
 
+import Engine.Utils.ClientContext;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class TestSummaryListener implements ITestListener {
 
@@ -62,15 +61,25 @@ public class TestSummaryListener implements ITestListener {
             summary.put("skipped", skipped);
             summary.put("failed_tests", failedTests);
             summary.put("duration", formatDuration(duration));
+            summary.put("client", ClientContext.getClient());
+            summary.put("timestamp",
+                    new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                            .format(new Date())
+            );
+            summary.put("browser",
+                    System.getProperty("browser", "chrome")
+            );
 
-            File resultsDir = new File("results");
-            if (!resultsDir.exists()) {
-                resultsDir.mkdirs();
-            }
+
+            File resultsDir = new File(ClientContext.getResultsPath());
+            resultsDir.mkdirs();
 
             ObjectMapper mapper = new ObjectMapper();
             mapper.writerWithDefaultPrettyPrinter()
-                    .writeValue(new File(resultsDir, "summary.json"), summary);
+                    .writeValue(
+                            new File(ClientContext.getSummaryPath()),
+                            summary
+                    );
 
         } catch (Exception e) {
             e.printStackTrace();

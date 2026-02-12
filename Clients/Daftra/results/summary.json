@@ -1,0 +1,9 @@
+{
+  "duration" : "0m 20s",
+  "total" : 1,
+  "passed" : 0,
+  "failed" : 1,
+  "failed_tests" : [ "validLoginTest" ],
+  "status" : "failed",
+  "skipped" : 0
+}

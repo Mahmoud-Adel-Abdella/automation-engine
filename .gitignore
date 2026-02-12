@@ -3,6 +3,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .kotlin
+clients/*/results/
+*.log
+*.png
+
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

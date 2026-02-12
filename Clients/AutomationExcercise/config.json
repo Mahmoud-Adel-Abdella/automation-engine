@@ -1,0 +1,18 @@
+{
+  "client": {
+    "id": "automationExcercise",
+    "project": "web_app"
+  },
+  "environment": {
+    "baseUrl": "https://www.automationexercise.com/login",
+    "browser": "chrome",
+    "headless": true
+  },
+  "credentials": {
+    "username": "mahaammoud224@gmailلا.com",
+    "password": "u@5hQ33YkG@s2Tw"
+  },
+  "execution": {
+    "stopOnFailure": true
+  }
+}

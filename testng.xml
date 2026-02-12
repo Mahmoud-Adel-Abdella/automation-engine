@@ -10,7 +10,7 @@
 
     <test name="Login Tests" verbose="2" preserve-order="true">
         <classes>
-            <class name="Tests.LoginTest">
+            <class name="Clients.Daftra.Tests.LoginTest">
                 <methods>
                     <include name="validLoginTest"/>
                     <include name="invalidLoginTest"/>

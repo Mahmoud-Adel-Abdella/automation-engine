@@ -68,6 +68,34 @@
                     <testFailureIgnore>false</testFailureIgnore>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
+
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                        <configuration>
+                            <target>
+
+                                <!-- اعمل فولدر العميل -->
+                                <mkdir dir="clients/${client}/results"/>
+
+                                <!-- انسخ testng-results.xml فقط -->
+                                <copy file="target/surefire-reports/testng-results.xml"
+                                      tofile="clients/${client}/results/testng-results.xml"
+                                      overwrite="true"/>
+
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
 
         </plugins>
     </build>

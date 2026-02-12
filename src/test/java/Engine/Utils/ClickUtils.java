@@ -1,11 +1,10 @@
-package Utilities;
+package Engine.Utils;
 
-import Pages.BasePage;
+import Engine.Base.BasePage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import Pages.BasePage;
 
 import java.time.Duration;
 import java.util.List;

@@ -1,9 +1,11 @@
-package Utilities;
+package Engine.Utils;
 
+import Engine.Utils.ClientContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class ConfigManager {
 
@@ -12,29 +14,33 @@ public class ConfigManager {
     static {
         try {
             ObjectMapper mapper = new ObjectMapper();
-            InputStream is = ConfigManager.class
-                    .getClassLoader()
-                    .getResourceAsStream("config.json");
 
-            if (is == null) {
-                throw new RuntimeException("config.json not found in resources");
-            }
+            String configPath = ClientContext.getConfigPath();
 
-            config = mapper.readTree(is);
+            byte[] jsonData = Files.readAllBytes(
+                    Paths.get(configPath)
+            );
+
+            config = mapper.readTree(jsonData);
 
         } catch (Exception e) {
-            throw new RuntimeException("Failed to load config.json", e);
+            throw new RuntimeException(
+                    "Failed to load config file", e
+            );
         }
     }
 
     public static String get(String keyPath) {
+
         String[] keys = keyPath.split("\\.");
         JsonNode node = config;
 
         for (String key : keys) {
             node = node.get(key);
             if (node == null) {
-                throw new RuntimeException("Key not found in config.json: " + keyPath);
+                throw new RuntimeException(
+                        "Key not found: " + keyPath
+                );
             }
         }
 

@@ -1,4 +1,4 @@
-package Utilities;
+package Engine.Utils;
 
 import com.github.javafaker.Faker;
 

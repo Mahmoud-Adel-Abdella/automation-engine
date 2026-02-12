@@ -1,11 +1,12 @@
-package Tests;
+package Clients.Daftra.Tests;
 
-import Pages.ClientsPage;
-import Pages.LoginPage;
-import Utilities.ConfigManager;
-import Utilities.DataFactory;
-import Utilities.TestListeners;
-import Utilities.TestSummaryListener;
+import Engine.Base.BaseTest;
+import Engine.Listeners.TestListeners;
+import Engine.Listeners.TestSummaryListener;
+import Clients.Daftra.Pages.ClientsPage;
+import Clients.Daftra.Pages.LoginPage;
+import Engine.Utils.ConfigManager;
+import Engine.Utils.DataFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -13,15 +14,15 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners({TestListeners.class, TestSummaryListener.class})
-public class ClientsTest extends BaseTest{
+public class ClientsTest extends BaseTest {
     private static final Logger log = LoggerFactory.getLogger(ClientsTest.class);
     ClientsPage clientsPage;
     LoginPage loginPage;
 
-    String email = "mahaammoud224@gmail.com";
-    String password = "u@5hQ33YkG@s2Tw";
+    String email = ConfigManager.get("credentials.username");
+    String password = ConfigManager.get("credentials.password");
 
-    @Test
+    @Test(groups = {"smoke"})
     public void validAddNewClient(){
         clientsPage = new ClientsPage(driver);
         loginPage = new LoginPage(driver);

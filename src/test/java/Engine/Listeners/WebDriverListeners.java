@@ -1,12 +1,13 @@
-package Utilities;
+package Engine.Listeners;
 
+import Engine.Utils.ExtentManger;
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.WebDriverListener;
 
 import java.util.Arrays;
 
-import static Utilities.ExtentManger.extentTest;
+import static Engine.Utils.ExtentManger.extentTest;
 
 
 public class WebDriverListeners implements WebDriverListener {

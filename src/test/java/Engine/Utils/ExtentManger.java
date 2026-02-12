@@ -1,6 +1,6 @@
-package Utilities;
+package Engine.Utils;
 
-import Tests.BaseTest;
+import Engine.Base.BaseTest;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
@@ -22,8 +22,7 @@ public class ExtentManger extends BaseTest {
 
     public static void initReport() {
         if (extentReports == null) {
-            String reportPath = System.getProperty("user.dir") + "/Reports/extentReport.html";
-            ExtentSparkReporter sparkReporter = new ExtentSparkReporter(reportPath);
+            ExtentSparkReporter sparkReporter = new ExtentSparkReporter(ClientContext.getReportPath());
 
             sparkReporter.config().setDocumentTitle("Automation Report");
             sparkReporter.config().setReportName("Regression");
@@ -39,16 +38,25 @@ public class ExtentManger extends BaseTest {
     }
 
     public static String screenShot(WebDriver driver, String testName) throws IOException {
-        String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-        String path = System.getProperty("user.dir") + "/ScreenShots/" + testName + "_" + timeStamp + ".png";
 
-        File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        File destination = new File(path);
+        String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss")
+                .format(new Date());
 
-        Files.createDirectories(destination.getParentFile().toPath());
+        // path based on client
+        String screenshotDir = ClientContext.getScreenshotsPath();
+
+        File directory = new File(screenshotDir);
+        directory.mkdirs(); // ensure directory exists
+
+        String fileName = testName + "_" + timeStamp + ".png";
+        File destination = new File(directory, fileName);
+
+        File src = ((TakesScreenshot) driver)
+                .getScreenshotAs(OutputType.FILE);
+
         Files.copy(src.toPath(), destination.toPath());
 
-        return path;
+        return destination.getAbsolutePath();
     }
 
 

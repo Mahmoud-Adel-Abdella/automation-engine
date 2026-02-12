@@ -1,6 +1,7 @@
-package Pages;
+package Clients.Daftra.Pages;
 
-import Utilities.ClickUtils;
+import Engine.Base.BasePage;
+import Engine.Utils.ClickUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
