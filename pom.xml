@@ -85,7 +85,8 @@
                                 <!-- انسخ testng-results.xml فقط -->
                                 <copy file="target/surefire-reports/testng-results.xml"
                                       tofile="clients/${client}/results/testng-results.xml"
-                                      overwrite="true"/>
+                                      overwrite="true"
+                                      failonerror="false"/>
 
                             </target>
                         </configuration>

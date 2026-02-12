@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 
 @Listeners({TestListeners.class, TestSummaryListener.class})
 public class ClientsTest extends BaseTest {
-    private static final Logger log = LoggerFactory.getLogger(ClientsTest.class);
+
     ClientsPage clientsPage;
     LoginPage loginPage;
 

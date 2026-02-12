@@ -3,7 +3,7 @@ package Engine.Utils;
 public class ClientContext {
 
     private static final String client =
-            System.getProperty("client" ,"automationExcercise");
+            System.getProperty("client");
 
     static {
         if (client == null || client.isEmpty()) {
