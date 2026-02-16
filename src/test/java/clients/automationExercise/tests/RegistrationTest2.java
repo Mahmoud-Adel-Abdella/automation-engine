@@ -8,10 +8,10 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners({TestListeners.class, TestSummaryListener.class})
-public class RegistrationTest extends BaseTest {
+public class RegistrationTest2 extends BaseTest {
     RegistrationPage register;
 
-    @Test(groups = {"smoke"})
+    @Test()
     public void RegisterTest(){
         register = new RegistrationPage(driver);
 

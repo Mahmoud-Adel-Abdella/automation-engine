@@ -63,15 +63,16 @@
                 <version>3.2.5</version>
 
                 <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
 
-                    <!-- مهم جدًا -->
-                    <includes>
-                        <include>clients/${client}/tests/**/*.java</include>
-                    </includes>
-
-                    <testFailureIgnore>false</testFailureIgnore>
-
+                    <systemPropertyVariables>
+                        <flow>${flow}</flow>
+                        <client>${client}</client>
+                    </systemPropertyVariables>
                 </configuration>
+
             </plugin>
 
             <plugin>

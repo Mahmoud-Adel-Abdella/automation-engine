@@ -42,6 +42,7 @@ public class WebDriverListeners implements WebDriverListener {
                 driver.getCurrentUrl() + "_ Load Time: " + loadTime);
     }
 
+
     //FindElement
     @Override
     public void beforeFindElement(WebDriver driver, By locator) {
@@ -53,6 +54,7 @@ public class WebDriverListeners implements WebDriverListener {
         System.out.println("FindElement Done: " + locator);
     }
 
+
     //GetText
     @Override
     public void beforeGetText(WebElement element) {
@@ -63,6 +65,7 @@ public class WebDriverListeners implements WebDriverListener {
     public void afterGetText(Alert alert, String result) {
         System.out.println("Get Text Done: " + result);
     }
+
 
     //SendKeys
     @Override

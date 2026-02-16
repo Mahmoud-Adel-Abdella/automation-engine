@@ -1,5 +1,6 @@
 package engine.listeners;
 
+import engine.run.RunManager;
 import engine.utils.ClientContext;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.ITestContext;
@@ -11,6 +12,8 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
+
+import static engine.listeners.TestListeners.failures;
 
 public class TestSummaryListener implements ITestListener {
 
@@ -49,19 +52,25 @@ public class TestSummaryListener implements ITestListener {
 
     @Override
     public void onFinish(ITestContext context) {
+
         try {
             Instant endTime = Instant.now();
             Duration duration = Duration.between(startTime, endTime);
 
+            double passRate = total == 0 ? 0 :
+                    ((double) passed / total) * 100;
+
             Map<String, Object> summary = new HashMap<>();
-            summary.put("status", failed > 0 ? "failed" : "passed");
+            summary.put("runId", RunManager.getRunId());
+            summary.put("client", RunManager.getClient());
+            summary.put("status", failed > 0 ? "FAILED" : "PASSED");
             summary.put("total", total);
             summary.put("passed", passed);
             summary.put("failed", failed);
             summary.put("skipped", skipped);
-            summary.put("failed_tests", failedTests);
-            summary.put("duration", formatDuration(duration));
-            summary.put("client", ClientContext.getClient());
+            summary.put("passRate", Math.round(passRate));
+            summary.put("durationSeconds", duration.getSeconds());
+            summary.put("failures", failures);
             summary.put("timestamp",
                     new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
                             .format(new Date())
@@ -70,25 +79,26 @@ public class TestSummaryListener implements ITestListener {
                     System.getProperty("browser", "chrome")
             );
 
-
-            File resultsDir = new File(ClientContext.getResultsPath());
+            File resultsDir = new File(RunManager.getResultsPath());
             resultsDir.mkdirs();
 
             ObjectMapper mapper = new ObjectMapper();
             mapper.writerWithDefaultPrettyPrinter()
                     .writeValue(
-                            new File(ClientContext.getSummaryPath()),
+                            new File(RunManager.getResultsPath() + "summary.json"),
                             summary
                     );
+
+            String runResultJson = "{"
+                    + "\"runId\":\"" + RunManager.getRunId() + "\","
+                    + "\"client\":\"" + RunManager.getClient() + "\","
+                    + "\"summaryPath\":\"" + RunManager.getResultsPath() + "summary.json\""
+                    + "}";
+
+            System.out.println("RUN_RESULT=" + runResultJson);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private String formatDuration(Duration duration) {
-        long minutes = duration.toMinutes();
-        long seconds = duration.minusMinutes(minutes).getSeconds();
-        return minutes + "m " + seconds + "s";
     }
 }

@@ -32,7 +32,7 @@ public class RegistrationPage extends BasePage {
     private final By zipCodeLocator = By.xpath("//*[@data-qa=\"zipcode\"]");
     private final By mobileNumberLocator = By.xpath("//*[@data-qa=\"mobile_number\"]");
 
-    private final By submitBtnLocator = By.xpath("//*[@data-qa=\"create-account\"]");
+    private final By submitBtnLocator = By.xpath("//*[@datda-qa=\"create-account\"]");
 
     public void fillRegister(String email, String name) {
         write(nameInputLocator, name);

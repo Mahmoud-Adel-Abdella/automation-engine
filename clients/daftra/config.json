@@ -1,0 +1,46 @@
+{
+  "version": 1,
+
+  "client": {
+    "id": "daftra",
+    "project": "web_app"
+  },
+
+  "environment": {
+    "baseUrl": "https://www.daftra.com/",
+    "browser": "chrome",
+    "headless": true,
+    "timeoutSeconds": 15
+  },
+
+  "execution": {
+    "defaultMode": "smoke",
+    "retryCount": 0,
+    "notifyPolicy": "fail-only"
+  },
+
+  "credentials": {
+    "username": "mahaammoud22@gmail.com",
+    "passwordEnv": "DAFTRA_PASSWORD"
+  },
+  "flows": {
+    "smoke": {
+      "description": "Basic smoke tests",
+      "tests": [
+        "clients.daftra.tests.LoginTest.validLoginTest",
+        "clients.daftra.tests.LoginTest.invalidLoginTest",
+        "clients.daftra.tests.LoginTest.invalidSecurityCodeValidation"
+      ]
+    },
+
+    "login_only": {
+      "description": "Login flow only",
+      "tests": [
+        "clients.daftra.tests.LoginTest.validLoginTest"
+      ]
+    }
+  }
+
+}
+
+

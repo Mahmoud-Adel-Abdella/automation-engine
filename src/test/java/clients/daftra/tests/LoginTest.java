@@ -14,14 +14,14 @@ import org.testng.annotations.Test;
 
 @Listeners({engine.listeners.TestListeners.class, engine.listeners.TestSummaryListener.class})
 public class LoginTest extends BaseTest {
-    private static final Logger log = LoggerFactory.getLogger(LoginTest.class);
+
     LoginPage loginPage;
 
-    String username = ConfigManager.get("credentials.username");
-    String password = ConfigManager.get("credentials.password");
-
-    @Test(groups = {"login","smoke","regression"})
+    @Test()
     public void validLoginTest(){
+        String username = ConfigManager.getUsername();
+        String password = ConfigManager.getPassword();
+
         loginPage = new LoginPage(driver);
 
         loginPage.navigateToLoginPage();

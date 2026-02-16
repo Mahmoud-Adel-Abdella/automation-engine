@@ -1,15 +1,27 @@
 {
+  "version": 1,
+
   "client": {
     "id": "automationExercise",
     "project": "web_app"
   },
+
   "environment": {
     "baseUrl": "https://www.automationexercise.com/login",
     "browser": "chrome",
-    "headless": true
+    "headless": true,
+    "timeoutSeconds": 15
   },
+
+  "execution": {
+    "defaultMode": "smoke",
+    "retryCount": 0,
+    "notifyPolicy": "fail-only"
+  },
+
   "credentials": {
-    "username": "mahaammoud224@gmailلا.com",
-    "password": "u@5hQ33YkG@s2Tw"
+    "username": "mahaammoud22@gmail.com",
+    "passwordEnv": "DAFTRA_PASSWORD"
   }
 }
+

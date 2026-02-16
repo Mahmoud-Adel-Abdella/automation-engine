@@ -134,7 +134,7 @@ public class ClickUtils extends BasePage {
             if (s.startsWith("By.cssSelector: ")) {
                 return s.replace("By.cssSelector: ", "").trim();
             }
-            if (s.startsWith("By.selector: ")) { // بعض الإصدارات
+            if (s.startsWith("By.selector: ")) {
                 return s.replace("By.selector: ", "").trim();
             }
         } catch (Exception ignored) {}
@@ -209,5 +209,4 @@ public class ClickUtils extends BasePage {
         System.out.println("❌ guaranteedClick FAILED for provided WebElement (current context). " +
                 "If the element might be inside a different iframe or shadow root, call the overloaded guaranteedClick(By locator) instead.");
     }
-
 }

@@ -5,6 +5,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import engine.run.RunManager;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -22,7 +23,7 @@ public class ExtentManger extends BaseTest {
 
     public static void initReport() {
         if (extentReports == null) {
-            ExtentSparkReporter sparkReporter = new ExtentSparkReporter(ClientContext.getReportPath());
+            ExtentSparkReporter sparkReporter = new ExtentSparkReporter(RunManager.getResultsPath() + "extent.html");
 
             sparkReporter.config().setDocumentTitle("Automation Report");
             sparkReporter.config().setReportName("Regression");
@@ -37,16 +38,15 @@ public class ExtentManger extends BaseTest {
         }
     }
 
-    public static String screenShot(WebDriver driver, String testName) throws IOException {
+    public static File screenShot(WebDriver driver, String testName) throws IOException {
 
         String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss")
                 .format(new Date());
 
-        // path based on client
-        String screenshotDir = ClientContext.getScreenshotsPath();
+        String screenshotDir = RunManager.getResultsPath() + "screenshots";
 
         File directory = new File(screenshotDir);
-        directory.mkdirs(); // ensure directory exists
+        directory.mkdirs();
 
         String fileName = testName + "_" + timeStamp + ".png";
         File destination = new File(directory, fileName);
@@ -56,9 +56,8 @@ public class ExtentManger extends BaseTest {
 
         Files.copy(src.toPath(), destination.toPath());
 
-        return destination.getAbsolutePath();
+        return destination;
     }
-
 
     public static void createTest(String testName){
         extentTest = extentReports.createTest(testName);

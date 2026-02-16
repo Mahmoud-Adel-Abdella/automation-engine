@@ -2,51 +2,73 @@ package engine.utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import engine.run.RunManager;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.File;
 
 public class ConfigManager {
 
     private static JsonNode config;
+    private static boolean initialized = false;
 
-    static {
+    public static void initialize() {
+        if (initialized) return;
+
         try {
+            String client = RunManager.getClient();
+            String path = "clients/" + client + "/config.json";
+
             ObjectMapper mapper = new ObjectMapper();
+            config = mapper.readTree(new File(path));
 
-            String configPath = ClientContext.getConfigPath();
-
-            byte[] jsonData = Files.readAllBytes(
-                    Paths.get(configPath)
-            );
-
-            config = mapper.readTree(jsonData);
+            initialized = true;
 
         } catch (Exception e) {
-            throw new RuntimeException(
-                    "Failed to load config file", e
-            );
+            throw new RuntimeException("Failed to load config.json", e);
         }
     }
 
-    public static String get(String keyPath) {
+    public static String getBaseUrl() {
+        return config.get("environment").get("baseUrl").asText();
+    }
 
-        String[] keys = keyPath.split("\\.");
-        JsonNode node = config;
+    public static String getBrowser() {
+        return config.get("environment").get("browser").asText();
+    }
 
-        for (String key : keys) {
-            node = node.get(key);
-            if (node == null) {
-                throw new RuntimeException(
-                        "Key not found: " + keyPath
-                );
-            }
+    public static boolean isHeadless() {
+        return config.get("environment").get("headless").asBoolean();
+    }
+
+    public static int getTimeout() {
+        return config.get("environment").get("timeoutSeconds").asInt();
+    }
+
+    public static String getUsername() {
+        return config.get("credentials").get("username").asText();
+    }
+
+    public static String getPassword() {
+        return config.get("credentials").get("passwordEnv").asText();
+    }
+
+    public static int getRetryCount() {
+        return config.get("execution").get("retryCount").asInt();
+    }
+
+    public static String getNotifyPolicy() {
+        return config.get("execution").get("notifyPolicy").asText();
+    }
+
+    public static JsonNode getFlow(String flowName) {
+
+        JsonNode flows = config.get("flows");
+
+        if (flows == null || flows.get(flowName) == null) {
+            throw new RuntimeException("Flow '" + flowName + "' not defined for this client.");
         }
 
-        return node.asText();
+        return flows.get(flowName);
     }
 
-    public static boolean getBoolean(String keyPath) {
-        return Boolean.parseBoolean(get(keyPath));
-    }
 }

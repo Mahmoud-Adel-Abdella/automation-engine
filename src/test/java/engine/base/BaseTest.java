@@ -1,5 +1,6 @@
 package engine.base;
 
+import engine.run.RunManager;
 import engine.utils.ConfigManager;
 import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
@@ -15,6 +16,10 @@ import org.testng.asserts.SoftAssert;
 import engine.listeners.WebDriverListeners;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.Duration;
 
 public class BaseTest {
@@ -23,20 +28,30 @@ public class BaseTest {
     protected SoftAssert softAssert;
     protected Faker faker;
 
-    String browser = ConfigManager.get("environment.browser");
-    boolean headless = ConfigManager.getBoolean("environment.headless");
-    String baseUrl = ConfigManager.get("environment.baseUrl");
 
-    static {
-        if (System.getProperty("client") == null) {
+    @BeforeSuite
+    public void beforeSuite() {
+
+        String client = System.getProperty("client");
+
+        if (client == null || client.isBlank()) {
             throw new RuntimeException(
                     "Client not specified! Use -Dclient=clientName"
             );
         }
+
+        RunManager.initialize();
+        ConfigManager.initialize();
     }
+
+
 
     @BeforeMethod(alwaysRun = true)
     public void setUpTest() {
+
+        String browser = ConfigManager.getBrowser();
+        String baseUrl = ConfigManager.getBaseUrl();
+        boolean headless = ConfigManager.isHeadless();
 
         switch (browser.toLowerCase()) {
 
@@ -73,7 +88,7 @@ public class BaseTest {
         driver = new EventFiringDecorator(myListeners).decorate(driver);
 
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(ConfigManager.getTimeout()));
         driver.get(baseUrl);
 
         faker = new Faker();
@@ -89,4 +104,16 @@ public class BaseTest {
         }
     }
 
+    @AfterSuite
+    public void afterSuite() throws IOException {
+        String source = "target/surefire-reports/testng-results.xml";
+        String destination = RunManager.getResultsPath() + "testng-results.xml";
+
+        Files.copy(
+                Paths.get(source),
+                Paths.get(destination),
+                StandardCopyOption.REPLACE_EXISTING
+        );
+
+    }
 }

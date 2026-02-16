@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 public class RegisterTest extends BaseTest {
     RegisterPage registerPage;
 
-    @Test(groups = {"smoke" ,"regression" ,"register"})
+    @Test()
     public void registerTest() throws InterruptedException {
         checkValidation1();
         fillCredentials1();

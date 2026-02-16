@@ -17,7 +17,6 @@ public final class DataFactory {
     private static final String state = faker.address().state();
 
 
-
     public static String getFirstName() {
         return fName;
     }

@@ -8,6 +8,7 @@ import clients.daftra.pages.LoginPage;
 import engine.utils.ConfigManager;
 import engine.utils.DataFactory;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -17,10 +18,16 @@ public class ClientsTest extends BaseTest {
     ClientsPage clientsPage;
     LoginPage loginPage;
 
-    String email = ConfigManager.get("credentials.username");
-    String password = ConfigManager.get("credentials.password");
+    String email ;
+    String password ;
 
-    @Test(groups = {"smoke"})
+    @BeforeClass
+    public void classSetup(){
+        String email = ConfigManager.getUsername();
+        String password = ConfigManager.getPassword();
+    }
+
+    @Test()
     public void validAddNewClient(){
         clientsPage = new ClientsPage(driver);
         loginPage = new LoginPage(driver);
