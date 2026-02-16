@@ -3,6 +3,7 @@ package engine.listeners;
 import engine.run.RunManager;
 import engine.utils.ClientContext;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import engine.utils.ConfigManager;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -24,6 +25,7 @@ public class TestSummaryListener implements ITestListener {
     private List<String> failedTests = new ArrayList<>();
     private List<String> skippedTests = new ArrayList<>();
     private Instant startTime;
+    String flowName = System.getProperty("flow");
 
     @Override
     public void onStart(ITestContext context) {
@@ -70,6 +72,8 @@ public class TestSummaryListener implements ITestListener {
             summary.put("skipped", skipped);
             summary.put("passRate", Math.round(passRate));
             summary.put("durationSeconds", duration.getSeconds());
+            String flow = System.getProperty("flow", "unknown");
+            summary.put("flow", flow);
             summary.put("failures", failures);
             summary.put("timestamp",
                     new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
