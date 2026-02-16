@@ -2,6 +2,7 @@
 <suite name="Dynamic Suite">
 
     <listeners>
+        <listener class-name="engine.listeners.TestListeners"/>
         <listener class-name="engine.run.DynamicSuiteBuilder"/>
     </listeners>
 

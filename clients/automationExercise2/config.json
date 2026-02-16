@@ -1,27 +1,32 @@
 {
   "version": 1,
-
   "client": {
     "id": "automationExercise2",
     "project": "web_app"
   },
-
   "environment": {
     "baseUrl": "https://www.automationexercise.com/login",
     "browser": "chrome",
     "headless": true,
     "timeoutSeconds": 15
   },
-
   "execution": {
     "defaultMode": "smoke",
     "retryCount": 0,
     "notifyPolicy": "fail-only"
   },
-
   "credentials": {
     "username": "mahaammoud22@gmail.com",
     "passwordEnv": "DAFTRA_PASSWORD"
+  },
+  "flows": {
+    "register": {
+      "description": "register",
+      "tests": [
+        "clients.automationExercise.tests.RegistrationTest.RegisterTest",
+        "clients.automationExercise.tests.RegistrationTest2.RegisterTest"
+      ]
+    }
   }
 }
 

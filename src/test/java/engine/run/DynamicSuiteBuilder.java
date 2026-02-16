@@ -20,7 +20,7 @@ public class DynamicSuiteBuilder implements IAlterSuiteListener {
             throw new RuntimeException("No flow specified");
         }
 
-        XmlSuite suite = suites.get(0);
+        XmlSuite suite = suites.getFirst();
         suite.setPreserveOrder(true);
 
         suite.getTests().clear();
