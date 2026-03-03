@@ -1,24 +1,20 @@
 {
   "version": 1,
-
   "client": {
     "id": "daftra",
     "project": "web_app"
   },
-
   "environment": {
     "baseUrl": "https://www.daftra.com/",
     "browser": "chrome",
     "headless": true,
     "timeoutSeconds": 15
   },
-
   "execution": {
     "defaultMode": "smoke",
     "retryCount": 0,
     "notifyPolicy": "fail-only"
   },
-
   "credentials": {
     "username": "mahaammoud224@gmail.com",
     "passwordEnv": "u@5hQ33YkG@s2Tw"
@@ -33,22 +29,20 @@
         "clients.daftra.tests.RegisterTest.registerTest"
       ]
     },
-
     "login_only": {
       "description": "Login flow only",
       "tests": [
         "clients.daftra.tests.LoginTest.validLoginTest"
       ]
-    }
-  }   ,
-
-  "register_only": {
+    },
+    "register_only": {
       "description": "Login flow only",
       "tests": [
         "clients.daftra.tests.RegisterTest.registerTest"
       ]
     }
   }
+}
 
 
 
