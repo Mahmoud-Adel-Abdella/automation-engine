@@ -20,8 +20,8 @@
   },
 
   "credentials": {
-    "username": "mahaammoud22@gmail.com",
-    "passwordEnv": "DAFTRA_PASSWORD"
+    "username": "mahaammoud224@gmail.com",
+    "passwordEnv": "u@5hQ33YkG@s2Tw"
   },
   "flows": {
     "smoke": {
@@ -29,7 +29,8 @@
       "tests": [
         "clients.daftra.tests.LoginTest.validLoginTest",
         "clients.daftra.tests.LoginTest.invalidLoginTest",
-        "clients.daftra.tests.LoginTest.invalidSecurityCodeValidation"
+        "clients.daftra.tests.LoginTest.invalidSecurityCodeValidation",
+        "clients.daftra.tests.RegisterTest.registerTest"
       ]
     },
 
@@ -39,8 +40,16 @@
         "clients.daftra.tests.LoginTest.validLoginTest"
       ]
     }
+  }   ,
+
+  "register_only": {
+      "description": "Login flow only",
+      "tests": [
+        "clients.daftra.tests.RegisterTest.registerTest"
+      ]
+    }
   }
 
-}
+
 
 

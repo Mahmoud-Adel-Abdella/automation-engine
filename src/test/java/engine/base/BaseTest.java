@@ -33,6 +33,7 @@ public class BaseTest {
     public void beforeSuite() {
 
         String client = System.getProperty("client");
+        System.setProperty("client", client);
 
         if (client == null || client.isBlank()) {
             throw new RuntimeException(
@@ -52,6 +53,7 @@ public class BaseTest {
         String browser = ConfigManager.getBrowser();
         String baseUrl = ConfigManager.getBaseUrl();
         boolean headless = ConfigManager.isHeadless();
+//        headless = false;
 
         switch (browser.toLowerCase()) {
 
@@ -102,18 +104,5 @@ public class BaseTest {
         if (driver != null) {
             driver.quit();
         }
-    }
-
-    @AfterSuite
-    public void afterSuite() throws IOException {
-        String source = "target/surefire-reports/testng-results.xml";
-        String destination = RunManager.getResultsPath() + "testng-results.xml";
-
-        Files.copy(
-                Paths.get(source),
-                Paths.get(destination),
-                StandardCopyOption.REPLACE_EXISTING
-        );
-
     }
 }

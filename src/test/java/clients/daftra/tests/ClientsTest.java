@@ -23,8 +23,8 @@ public class ClientsTest extends BaseTest {
 
     @BeforeClass
     public void classSetup(){
-        String email = ConfigManager.getUsername();
-        String password = ConfigManager.getPassword();
+        email = ConfigManager.getUsername();
+        password = ConfigManager.getPassword();
     }
 
     @Test()
